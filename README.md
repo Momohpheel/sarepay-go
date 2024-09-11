@@ -7,11 +7,14 @@ sarepay-go is a Go client library for accessing the SarePay API.
 ## Usage
 
 ``` go
-var res map[string]interface{}
+    var (
+        res map[string]interface{}
+        c http.Client
+    )
 
-	papiKey := "PUBLIC-CRQxGh92giUAlGRx35avL"
-	merchantKey := "h701JqoYUJAOFAC7JugdIEx"
-	var c http.Client
+	papiKey := "PUBLIC-test"
+	merchantKey := "test"
+
 
 	client := sarepay.NewClient(papiKey, &c)
 
@@ -25,6 +28,7 @@ var res map[string]interface{}
 		},
 		Reference: "jekkditestsffarepddddassy",
 	}
+    
 	res, err := client.Transaction.Initialize(&transRequest)
 	if err != nil {
 		//do something with error

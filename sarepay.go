@@ -35,7 +35,9 @@ type Client struct {
 	//logger Logger
 	// Services supported by the Sarepay API.
 	// Miscellaneous actions are directly implemented on the Client object
-	Transaction *TransactionService
+	Transaction    *TransactionService
+	VirtualAccount *VirtualAccountService
+	Transfer       *TransferService
 	// SubAccount  *SubAccountService
 	// Charge      *ChargeService
 
@@ -52,16 +54,16 @@ type Logger interface {
 type Response map[string]interface{}
 
 // NewClient creates a new Sarepay API client with the given API key
-func NewClient(publickey string, httpClient *http.Client) *Client {
+func NewClient(publickey, secretkey string, httpClient *http.Client) *Client {
 	if httpClient == nil {
 		httpClient = &http.Client{Timeout: defaultHTTPTimeout}
 	}
 
 	u, _ := url.Parse(baseURL)
 	c := &Client{
-		client:    httpClient,
-		publicKey: publickey,
-		//secretKey: secretkey,
+		client:         httpClient,
+		publicKey:      publickey,
+		secretKey:      secretkey,
 		baseURL:        u,
 		LoggingEnabled: true,
 		Log:            log.New(os.Stderr, "", log.LstdFlags),
@@ -70,6 +72,8 @@ func NewClient(publickey string, httpClient *http.Client) *Client {
 	c.common.client = c
 
 	c.Transaction = (*TransactionService)(&c.common)
+	c.VirtualAccount = (*VirtualAccountService)(&c.common)
+	c.Transfer = (*TransferService)(&c.common)
 
 	return c
 }

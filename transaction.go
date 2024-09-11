@@ -3,7 +3,6 @@ package sarepay
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"net/http"
 )
 
@@ -69,7 +68,6 @@ func (s *TransactionService) Initialize(txn *TransactionInput) (Response, error)
 		Reference:   txn.Reference,
 	}
 
-	fmt.Println(transactionInput)
 	payload, err := json.Marshal(transactionInput)
 	if err != nil {
 		return resp, err

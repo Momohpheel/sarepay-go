@@ -28,11 +28,9 @@ type Client struct {
 	common  service      // Reuse a single struct instead of allocating one for each service on the heap.
 	client  *http.Client // HTTP client used to communicate with the API.
 	baseURL *url.URL
-	// the API Key used to authenticate all Sarepay API requests
+	// the API Keys used to authenticate Sarepay API requests
 	publicKey string
 	secretKey string
-
-	//logger Logger
 	// Services supported by the Sarepay API.
 	// Miscellaneous actions are directly implemented on the Client object
 	Transaction    *TransactionService

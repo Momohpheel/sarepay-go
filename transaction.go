@@ -61,8 +61,8 @@ func (s *TransactionService) Initialize(txn *TransactionInput) (Response, error)
 			Email: txn.Customer.Email,
 		},
 		Metadata: Metadata{
-			TaxID:      "ssssss",
-			CustomerID: "sss",
+			TaxID:      "taxId",
+			CustomerID: "CustomerID",
 		},
 		ContainerID: "payment-container",
 		Reference:   txn.Reference,

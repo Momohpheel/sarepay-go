@@ -36,7 +36,13 @@ sarepay-go is a Go client library for accessing the SarePay API.
 
 	datas, ok := res["data"].(map[string]interface{})
 	if !ok {
-		fmt.Println("Error: 'data' is not a map")
+		errors, ok := res["errors"].(map[string]interface{})
+		if !ok {
+			fmt.Println("Error: 'errors' is not a string")
+			return
+		}
+
+		fmt.Println(errors)
 		return
 	}
 

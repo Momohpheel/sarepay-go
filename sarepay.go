@@ -52,15 +52,16 @@ type Logger interface {
 type Response map[string]interface{}
 
 // NewClient creates a new Sarepay API client with the given API key
-func NewClient(key string, httpClient *http.Client) *Client {
+func NewClient(publickey string, httpClient *http.Client) *Client {
 	if httpClient == nil {
 		httpClient = &http.Client{Timeout: defaultHTTPTimeout}
 	}
 
 	u, _ := url.Parse(baseURL)
 	c := &Client{
-		client:         httpClient,
-		publicKey:      key,
+		client:    httpClient,
+		publicKey: publickey,
+		//secretKey: secretkey,
 		baseURL:        u,
 		LoggingEnabled: true,
 		Log:            log.New(os.Stderr, "", log.LstdFlags),

@@ -16,7 +16,7 @@ sarepay-go is a Go client library for accessing the SarePay API.
 	merchantKey := "test"
 
 
-	client := sarepay.NewClient(papiKey, &c)
+	client := sarepay.NewClient(papiKey, sapiKey, &c)
 
 	transRequest := sarepay.TransactionInput{
 		Key:    papiKey,
